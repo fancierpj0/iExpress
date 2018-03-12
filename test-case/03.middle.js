@@ -9,10 +9,11 @@ app
     res.write('/user中间件&nbsp;');
     next('跳转到错误处理 ---');
     // next();
-  },function(req,res,next){
+  },function(err,req,res,next){
     console.log('/user中间件2');
     res.write('/user中间件2&nbsp;');
-    next();
+    res.end(err+'我是同一个中间件中的错误处理');
+    // next();
   },function(req,res,next){
     console.log('/user中间件3');
     res.write('/user中间件3&nbsp;');
