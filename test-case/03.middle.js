@@ -3,7 +3,7 @@ const express = require('../lib/express');
 let app = express();
 
 app
-  .use('/user',function(req,res,next){
+  .use('/user/',function(req,res,next){
     res.setHeader('Content-Type','text/html;Charset=utf-8');
     console.log('/user中间件');
     res.write('/user中间件&nbsp;');
