@@ -1,5 +1,5 @@
-// const express = require('express');
-const express = require('../lib/express');
+const express = require('express');
+// const express = require('../lib/express');
 let app = express();
 
 app
@@ -12,8 +12,8 @@ app
   },function(err,req,res,next){
     console.log('/user中间件2');
     res.write('/user中间件2&nbsp;');
-    res.end(err+'我是同一个中间件中的错误处理');
-    // next();
+    // res.end(err+'我是同一个中间件中的错误处理');
+    next(err);
   },function(req,res,next){
     console.log('/user中间件3');
     res.write('/user中间件3&nbsp;');
@@ -33,7 +33,11 @@ app
   })
   .use(function(err,req,res,next){
     console.log('我是错误处理3');
-    res.end(err+'我是最后的错误处理');
+    res.write(err+'我是最后的错误处理');
+    next();
+  })
+  .get('/user',function(req,res,next){
+    res.end('/user结束2')
   })
 
 .listen(8080);

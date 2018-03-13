@@ -1,5 +1,5 @@
-// const express = require('express');
-const express = require('../lib/express.js');
+const express = require('express');
+// const express = require('../lib/express.js');
 const app = express();
 let slice = Array.prototype.slice;
 
@@ -12,6 +12,10 @@ app
     console.log('同个动态参数下绑定的第二个函数');
     next();
   })
+  .get('/account/:name/:id',function(req,res,next){
+    console.log('我是没有结束响应的get');
+    next();
+  }) //动态参数绑定的钩子一次请求当中只会被执行一次
   .get('/account/:name/:id/',function(req,res,next){
     res.setHeader('Content-Type','text/html;charset=utf-8');
     console.log(req.params.name);
